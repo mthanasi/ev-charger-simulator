@@ -56,7 +56,18 @@ This spins up:
 - Postgres database (on port 5433)
 - Next.js 15 UI (on port 3000) with recharts, tailwind, etc.
 
-### 2. Makefile Commands
+### 2. Simulator Assumptions
+- ⁠Arrival model: Bernoulli trial for every free charge point each tick.
+- ⁠Charging-need model: Drawn from table T2 (kilometres of range). "None"
+  (34.31%) results in no charging and the chargepoint stays free.
+- ⁠Charging power: Constant 11 kW while plugged in.
+- Spill-over rule: If an EV's demand finishes partway
+  through a tick, the chargepoint remains *occupied for the entire tick*
+  but only the *fractional energy* is added to the total.
+- ⁠Departure: Vehicles leave immediately once their energy demand reaches
+  zero and the station becomes available from the next tick onwards.
+
+### 3. Makefile Commands
 
 ```bash
 make help      # Show help message with all available commands
